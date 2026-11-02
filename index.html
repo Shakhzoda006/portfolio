@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shakhzoda Niyazova</title>
+<meta name="description" content="Computer science and industrial design student at KAIST. Web products and physical objects.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Barlow+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* Drafting-sheet palette: paper, graphite, construction line, drafting blue.
+     Dark mode switches to a blueprint. */
+  :root {
+    color-scheme: light;
+    --paper: #f4f6f7;
+    --sheet: #ffffff;
+    --ink: #1f2933;
+    --muted: #52606d;
+    --line: #9aa5b1;
+    --hair: #d5dbe1;
+    --accent: #2b65a8;
+    --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+    --cond: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --measure: 66ch;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --paper: #0f2740;
+      --sheet: #123050;
+      --ink: #e4edf5;
+      --muted: #a3b8cc;
+      --line: #5a7896;
+      --hair: #24476b;
+      --accent: #8fc5f0;
+    }
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 1.0625rem/1.6 var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+  img, video { max-width: 100%; height: auto; display: block; }
+  a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .wrap { width: min(1180px, 100% - 2.5rem); margin-inline: auto; }
+
+  /* ---------- Hero: a drawing sheet ---------- */
+  .sheet-outer { padding: clamp(1.25rem, 4vw, 3rem) 0 0; }
+  .sheet {
+    position: relative;
+    background: var(--sheet);
+    border: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1.6rem 1fr;
+    grid-template-rows: 1.6rem 1fr;
+  }
+  .zones-top, .zones-left {
+    display: grid;
+    font: 500 0.75rem/1 var(--cond);
+    color: var(--muted);
+  }
+  .zones-top { grid-column: 2; grid-template-columns: repeat(6, 1fr); border-bottom: 1px solid var(--line); }
+  .zones-left { grid-row: 2; grid-template-rows: repeat(4, 1fr); border-right: 1px solid var(--line); }
+  .zones-top span, .zones-left span { display: grid; place-items: center; }
+  .zones-top span + span { border-left: 1px solid var(--hair); }
+  .zones-left span + span { border-top: 1px solid var(--hair); }
+  .corner { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  .sheet-body {
+    grid-column: 2; grid-row: 2;
+    padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 5vw, 4rem) 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 1fr auto;
+    column-gap: 2rem;
+    min-height: min(78vh, 46rem);
+  }
+  .intro { align-self: center; max-width: 40rem; padding-bottom: 2.5rem; }
+  h1 {
+    font: 600 clamp(3.2rem, 9vw, 7.25rem)/0.88 var(--cond);
+    letter-spacing: -0.01em;
+    margin: 0 0 1.5rem;
+  }
+  h1 span { display: block; }
+  .lede { font-size: clamp(1.15rem, 1.8vw, 1.35rem); line-height: 1.5; margin: 0 0 1.75rem; max-width: 34em; }
+  .contact { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 0; padding: 0; list-style: none; font-weight: 500; }
+
+  /* Title block, modeled on the one in my Fusion 360 drawings */
+  .title-block {
+    grid-column: 1 / -1; justify-self: end; align-self: end;
+    width: min(100%, 34rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    margin: 0 calc(-1 * clamp(1.25rem, 5vw, 4rem)) 0 0;
+  }
+  .title-block div { padding: 0.35rem 0.7rem 0.45rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .title-block div:nth-child(2n) { border-right: 0; }
+  .title-block div:last-child { border-bottom: 0; }
+  .title-block dt { font-size: 0.72rem; color: var(--muted); line-height: 1.3; }
+  .title-block dd { margin: 0; font: 500 1.05rem/1.25 var(--cond); }
+  .title-block .wide { grid-column: 1 / -1; border-right: 0; }
+
+  /* ---------- Sections ---------- */
+  main { padding-bottom: 4rem; }
+  .section { padding-top: clamp(4rem, 9vw, 7rem); }
+  .section > h2 {
+    font: 600 clamp(2rem, 4.5vw, 3rem)/1 var(--cond);
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-note { color: var(--muted); margin: 0.9rem 0 0; max-width: var(--measure); }
+
+  .project {
+    display: grid;
+    grid-template-columns: minmax(13rem, 17rem) minmax(0, 1fr);
+    gap: 1.5rem clamp(2rem, 5vw, 4.5rem);
+    padding: clamp(2.5rem, 5vw, 3.75rem) 0;
+  }
+  .project + .project { border-top: 1px solid var(--hair); }
+  .project { grid-template-areas: "meta head" "meta body"; grid-template-rows: auto 1fr; row-gap: 0; }
+  .project .meta { grid-area: meta; }
+  .project .head { grid-area: head; }
+  .project .body { grid-area: body; min-width: 0; }
+  .project h3 { font: 600 clamp(1.9rem, 3.4vw, 2.5rem)/1.02 var(--cond); margin: 0 0 0.35rem; }
+  .project .sub { margin: 0 0 1.5rem; color: var(--muted); font-size: 1.05rem; line-height: 1.4; }
+  .meta { align-self: start; position: sticky; top: calc(1.5rem + env(safe-area-inset-top, 0px)); }
+  .meta dl { margin: 0; display: grid; gap: 0.85rem; }
+  .meta dt { font-size: 0.8rem; color: var(--muted); }
+  .meta dd { margin: 0; font-weight: 500; line-height: 1.4; }
+  .award { display: inline-block; margin-top: 0.15rem; padding: 0.15rem 0.5rem; border: 1px solid var(--accent); color: var(--accent); font: 600 0.95rem/1.3 var(--cond); }
+
+  .prose { max-width: var(--measure); }
+  .prose p { margin: 0 0 1.05rem; }
+  .prose h4 { font: 600 1.25rem/1.2 var(--cond); margin: 1.9rem 0 0.5rem; }
+
+  .media { display: grid; gap: 1rem; margin-top: 2rem; }
+  .media.two { grid-template-columns: 1fr 1fr; }
+  figure { margin: 0; }
+  figure img, figure video { width: 100%; border: 1px solid var(--hair); background: var(--sheet); }
+  figcaption { font-size: 0.875rem; color: var(--muted); margin-top: 0.45rem; line-height: 1.4; }
+  .tall img { aspect-ratio: 3 / 4; object-fit: cover; }
+  .lead img { aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 42%; }
+  .even img { aspect-ratio: 4 / 3; object-fit: cover; }
+  .media.two { align-items: start; }
+  .zoom { display: block; }
+  .shots:not(:has(figure)) { display: none; }
+
+  /* ---------- About ---------- */
+  .about { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem clamp(2rem, 4vw, 3.5rem); margin-top: 2.25rem; }
+  .about h3 { font: 600 1.35rem/1.2 var(--cond); margin: 0 0 0.85rem; }
+  .entry { margin: 0 0 1.4rem; }
+  .entry strong { display: block; font-weight: 600; }
+  .entry span { display: block; color: var(--muted); font-size: 0.95rem; }
+  .entry p { margin: 0.35rem 0 0; }
+  .skills { margin: 0; display: grid; gap: 0.8rem; }
+  .skills dt { font-size: 0.8rem; color: var(--muted); }
+  .skills dd { margin: 0; }
+
+  footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: 0.9rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .project { grid-template-columns: 1fr; grid-template-areas: "head" "meta" "body"; grid-template-rows: auto; }
+    .meta { position: static; margin-bottom: 1.75rem; }
+    .meta dl { grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); }
+    .about { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .sheet { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+    .zones-left, .corner { display: none; }
+    .zones-top { grid-column: 1; grid-template-columns: repeat(4, 1fr); }
+    .zones-top span:nth-child(n+5) { display: none; }
+    .sheet-body { grid-column: 1; grid-template-columns: 1fr; min-height: 0; }
+    .title-block { width: auto; justify-self: stretch; margin: 0 calc(-1 * clamp(1.25rem, 5vw, 4rem)); border-left: 0; }
+    .media.two { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap sheet-outer">
+  <div class="sheet">
+    <div class="corner" aria-hidden="true"></div>
+    <div class="zones-top" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
+    <div class="zones-left" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span></div>
+
+    <div class="sheet-body">
+      <div class="intro">
+        <h1><span>Shakhzoda</span><span>Niyazova</span></h1>
+        <p class="lede">I study computer science and industrial design at KAIST. I build web products, design physical objects, and care how both feel to use.</p>
+        <ul class="contact">
+          <li><a href="mailto:shaxzoda@kaist.ac.kr">shaxzoda@kaist.ac.kr</a></li>
+          <li data-config="github"><a href="#">GitHub</a></li>
+          <li data-config="cv"><a href="#">CV (PDF)</a></li>
+        </ul>
+      </div>
+
+      <dl class="title-block" aria-label="Summary">
+        <div><dt>University</dt><dd>KAIST</dd></div>
+        <div><dt>Year</dt><dd>3rd year</dd></div>
+        <div><dt>Majors</dt><dd>Computer Science, Industrial Design</dd></div>
+        <div><dt>Based in</dt><dd>Daejeon, Korea</dd></div>
+        <div class="wide"><dt>Status</dt><dd>Looking for a software engineering internship, winter 2026</dd></div>
+      </dl>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ================= SOFTWARE ================= -->
+  <section class="section" id="software" aria-labelledby="software-h">
+    <h2 id="software-h">Software</h2>
+
+    <article class="project" aria-labelledby="devmatch-h">
+      <aside class="meta">
+        <dl>
+          <div><dt>My role</dt><dd>Frontend lead</dd></div>
+          <div><dt>Team</dt><dd>4 developers</dd></div>
+          <div><dt>Context</dt><dd>CS350 Software Engineering, KAIST, spring 2026</dd></div>
+          <div><dt>Stack</dt><dd>Next.js, TypeScript, FastAPI, PostgreSQL, WebSockets, Docker</dd></div>
+          <div><dt>Code</dt><dd><a href="https://github.com/AbsoluteZero-cmd/DevMatch" data-config-link="devmatch">View the repository</a></dd></div>
+        </dl>
+      </aside>
+
+      <header class="head">
+        <h3 id="devmatch-h">DevMatch</h3>
+        <p class="sub">A platform that matches developers to teams by what the team is missing, not by who ranks highest.</p>
+      </header>
+
+      <div class="body">
+        <div class="prose">
+          <p>On most hiring platforms, teams see the top-ranked developers first, cherry-pick them, and junior developers get left out. DevMatch recommends developers by the gap in a team: role first, then experience, then skill score. Teams can send offers to developers, developers can apply to teams, and both sides can message in real time.</p>
+          <p>We built it to a specification written by another student team acting as our client, and reviewed progress with them in three meetings. I owned the frontend architecture: the dashboard, public and private profiles, the offer workflow, and the state management behind two-way applications.</p>
+          <h4>What changed along the way</h4>
+          <p>Midway through, the client asked for private profiles to stay hidden from browsing but remain reachable by the matching engine, so we separated who can see a profile from who can be recommended. Testing also caught a real bug: the AI analysis returned different skill scores for the same profile on repeated runs. Casual use would never have shown it, and fixing it made the core feature reliable.</p>
+        </div>
+
+        <!-- Screenshots: add images/devmatch-1.jpg, -2, -3. Missing files hide themselves. -->
+        <div class="media two shots">
+          <figure><img src="images/devmatch-1.jpg" alt="DevMatch dashboard" loading="lazy" onerror="this.closest('figure').remove()"><figcaption>Dashboard</figcaption></figure>
+          <figure><img src="images/devmatch-2.jpg" alt="DevMatch developer profile" loading="lazy" onerror="this.closest('figure').remove()"><figcaption>Developer profile</figcaption></figure>
+          <figure><img src="images/devmatch-3.jpg" alt="DevMatch offer and application flow" loading="lazy" onerror="this.closest('figure').remove()"><figcaption>Offers and applications</figcaption></figure>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= DESIGN ================= -->
+  <section class="section" id="design" aria-labelledby="design-h">
+    <h2 id="design-h">Industrial design</h2>
+    <p class="section-note">My second major. Both projects below were modeled entirely in CAD; the first was also 3D printed and assembled by hand.</p>
+
+    <article class="project" aria-labelledby="meros-h">
+      <aside class="meta">
+        <dl>
+          <div><dt>Project</dt><dd>Solo</dd></div>
+          <div><dt>Context</dt><dd>Design Studio II, KAIST, fall 2026</dd></div>
+          <div><dt>Tools</dt><dd>Rhino, 3D printing</dd></div>
+          <div><dt>Size</dt><dd>30 × 30 cm</dd></div>
+          <div><dt>Shown</dt><dd>Student exhibition at KAIST, fall 2026</dd></div>
+        </dl>
+      </aside>
+
+      <header class="head">
+        <h3 id="meros-h">Meros</h3>
+        <p class="sub">A pendant light about heritage: fragments that remember the whole.</p>
+      </header>
+
+      <div class="body">
+
+        <figure class="media lead">
+          <img src="images/meros-photo.jpg" alt="The finished Meros pendant light hanging in a dark room, glowing through its star-patterned lattice panels" width="1400" height="1867" loading="lazy">
+          <figcaption>The finished lamp at the exhibition.</figcaption>
+        </figure>
+
+        <div class="prose" style="margin-top:2rem">
+          <p><i>Meros</i> means heritage in Uzbek. The Persian Empire no longer exists, but its ideas didn’t disappear. They live on in other cultures, including the architecture of Uzbekistan, where I come from.</p>
+          <p>The lamp is a star built from rhombic panels. Each panel carries a tiling of smaller stars, so every fragment still holds the pattern of the whole. The geometry comes from Persian tilework, which used endless patterns to suggest infinity; Art Deco gave it discipline, with strict symmetry and a radiating silhouette.</p>
+          <p>I modeled the geometry and a clip-together joint system in Rhino, so the panels assemble into a star and come apart again. Every panel was 3D printed and assembled by hand.</p>
+        </div>
+
+        <div class="media two">
+          <figure class="even"><img src="images/meros-panel-front.jpg" alt="Five printed rhombic panels laid out in a star, front side showing the lattice pattern" width="1280" height="1011" loading="lazy"><figcaption>Printed panels, front.</figcaption></figure>
+          <figure class="even"><img src="images/meros-panel-back.jpg" alt="Five printed panels from the back, joined at a central ring" width="1280" height="945" loading="lazy"><figcaption>The back, where the clips meet the central ring.</figcaption></figure>
+        </div>
+
+        <div class="media two">
+          <figure class="tall"><img src="images/meros-render-gallery.jpg" alt="Visualization of Meros hanging in a dark gallery space" width="1200" height="1607" loading="lazy"><figcaption>AI-assisted visualization in a gallery setting.</figcaption></figure>
+          <figure class="tall"><img src="images/meros-render-room.jpg" alt="Visualization of Meros hanging above a sofa in a living room" width="1200" height="1200" loading="lazy"><figcaption>AI-assisted visualization in a living room.</figcaption></figure>
+        </div>
+        <p class="section-note">I used AI to generate an early concept sketch and the two scene visualizations above. The pattern, geometry, joints, modeling, and fabrication are my own.</p>
+      </div>
+    </article>
+
+    <article class="project" aria-labelledby="lamp-h">
+      <aside class="meta">
+        <dl>
+          <div><dt>Recognition</dt><dd><span class="award">2nd place, Autodesk Design Competition</span></dd></div>
+          <div><dt>Project</dt><dd>Solo</dd></div>
+          <div><dt>Context</dt><dd>Computer-Aided Design, KAIST, spring 2026</dd></div>
+          <div><dt>Tools</dt><dd>Fusion 360, KeyShot</dd></div>
+          <div><dt>Size</dt><dd>Arms 370 mm each, head 400 mm, about 72 cm tall</dd></div>
+        </dl>
+      </aside>
+
+      <header class="head">
+        <h3 id="lamp-h">Adjustable table lamp</h3>
+        <p class="sub">A spring-balanced desk lamp that shows its mechanism instead of hiding it.</p>
+      </header>
+
+      <div class="body">
+
+        <figure class="media">
+          <video src="videos/lamp-motion.mp4" poster="images/lamp-motion-poster.jpg" muted loop playsinline preload="metadata" data-autoplay aria-label="Animation of the lamp arm moving through its range"></video>
+          <figcaption>The arm moving through its range.</figcaption>
+        </figure>
+
+        <div class="prose" style="margin-top:2rem">
+          <p>The lamp follows George Carwardine’s 1932 Anglepoise, where springs balance the arm so it holds any position. Rather than the clean, hidden-mechanism look of most modern lamps, I took a postmodern approach: the springs, bolts, and linkages are left exposed and become the lamp’s visual language, wrapped around a slim LED head.</p>
+          <p>I modeled the full assembly in Fusion 360, from the parallel arm linkages and spring mounts to the head housing, then animated it to test how the arm moves. Standard hardware such as screws, nuts, springs, and the switch came from component libraries. The project won second place in the Autodesk Design Competition.</p>
+        </div>
+
+        <figure class="media">
+          <img src="images/lamp-render.jpg" alt="Render of the black lamp on a dark desk with its LED head lit" width="1600" height="1144" loading="lazy">
+          <figcaption>Final render.</figcaption>
+        </figure>
+
+        <figure class="media">
+          <img src="images/lamp-details.jpg" alt="Three close-ups: the bolted head joint, the exposed springs at the base, and the articulated arm links" width="1600" height="438" loading="lazy">
+          <figcaption>Bolts and nuts at the head, exposed springs and cable at the base, articulated links at the elbow.</figcaption>
+        </figure>
+
+        <figure class="media">
+          <video src="videos/lamp-assembly.mp4" poster="images/lamp-assembly-poster.jpg" muted loop playsinline controls preload="metadata" aria-label="Exploded assembly animation of the lamp"></video>
+          <figcaption>Exploded assembly animation.</figcaption>
+        </figure>
+
+        <div class="media two">
+          <figure><a class="zoom" href="images/lamp-drawing-views.jpg"><img src="images/lamp-drawing-views.jpg" alt="Technical drawing with front, side, and section views and key dimensions" width="1800" height="1268" loading="lazy"></a><figcaption>Technical drawing, sheet 1: views and dimensions. Select to enlarge.</figcaption></figure>
+          <figure><a class="zoom" href="images/lamp-drawing-exploded.jpg"><img src="images/lamp-drawing-exploded.jpg" alt="Exploded view drawing with a nine-item parts list" width="1400" height="1991" loading="lazy"></a><figcaption>Sheet 2: exploded view and parts list. Select to enlarge.</figcaption></figure>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="section" id="about" aria-labelledby="about-h">
+    <h2 id="about-h">Background</h2>
+    <div class="about">
+      <div>
+        <h3>Education</h3>
+        <div class="entry">
+          <strong>KAIST</strong>
+          <span>B.Sc. Computer Science and Industrial Design, double major</span>
+          <span>Sep 2024 to present</span>
+          <p>Coursework includes data structures, system programming, programming languages, software engineering, databases, and computer-aided design.</p>
+        </div>
+      </div>
+      <div>
+        <h3>Experience</h3>
+        <div class="entry">
+          <strong>Student Assistant, KAIST</strong>
+          <span>International Scholar &amp; Student Services, and International Relations Team</span>
+          <span>Sep 2025 to present</span>
+          <p>Front-desk and administrative support for international students, campus programs, and visiting delegations.</p>
+        </div>
+      </div>
+      <div>
+        <h3>Skills</h3>
+        <dl class="skills">
+          <div><dt>Languages</dt><dd>Python, TypeScript, JavaScript, HTML, CSS</dd></div>
+          <div><dt>Frameworks and tools</dt><dd>Next.js, React, FastAPI, PostgreSQL, Docker, Git</dd></div>
+          <div><dt>Design</dt><dd>Rhino, Fusion 360, KeyShot, Figma, Illustrator</dd></div>
+          <div><dt>Spoken</dt><dd>Uzbek (native), English (fluent), Russian (advanced), Korean (beginner)</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Shakhzoda Niyazova, <a href="mailto:shaxzoda@kaist.ac.kr">shaxzoda@kaist.ac.kr</a></span>
+    <span>Last updated November 2026</span>
+  </div>
+</footer>
+
+<script>
+  /* ---- Fill these in, then save. Blank values hide the matching link. ---- */
+  const SITE = {
+    github: "",   // your GitHub username, e.g. "shakhzoda-n"
+    cv: "",       // CV file name in this folder, e.g. "cv.pdf"
+    devmatchRepo: "" // link to your own fork, if you make one; blank keeps the team repo
+  };
+
+  document.querySelectorAll("[data-config]").forEach(el => {
+    const key = el.dataset.config;
+    const val = SITE[key];
+    if (!val) { el.remove(); return; }
+    el.querySelector("a").href = key === "github" ? "https://github.com/" + val : val;
+  });
+  if (SITE.devmatchRepo) {
+    document.querySelector('[data-config-link="devmatch"]').href = SITE.devmatchRepo;
+  }
+
+  /* Autoplay the short motion clip only when visible and when motion is welcome. */
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll("video[data-autoplay]").forEach(v => {
+    if (reduce) { v.controls = true; return; }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting ? v.play().catch(() => { v.controls = true; }) : v.pause());
+    }, { threshold: 0.4 });
+    io.observe(v);
+  });
+</script>
+</body>
+</html>
